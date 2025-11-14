@@ -331,7 +331,7 @@ public class GarenGateway
                     
                     continue;
                 }
-
+                //
                // Form1.carregaListAux("Garen Conectada Equipamento: " + _idEquipamento + " idControladora " + _idControladora);
 
                 Debug.WriteLine($"[Equipamento {_idEquipamento} / Controladora {_idControladora}] Conectado na Controladora");

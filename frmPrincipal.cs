@@ -244,9 +244,11 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.TopMost = false;
             frmConfiguracao frm = new frmConfiguracao();    
             frm.ShowDialog();
-           //Close(); 
+            this.TopMost = true;
+            //Close(); 
         }
     }
 }
