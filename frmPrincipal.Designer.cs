@@ -35,6 +35,13 @@
             btnMinimize = new Button();
             btnSair = new Button();
             btnConfigurar = new Button();
+            mnu = new MenuStrip();
+            menu = new ToolStripMenuItem();
+            mnuCadastrarEquipamento = new ToolStripMenuItem();
+            mnuConfiguracao = new ToolStripMenuItem();
+            mnuMinimizar = new ToolStripMenuItem();
+            mnuSair = new ToolStripMenuItem();
+            mnu.SuspendLayout();
             SuspendLayout();
             // 
             // label4
@@ -88,6 +95,7 @@
             btnMinimize.TabIndex = 25;
             btnMinimize.Text = "Minimize";
             btnMinimize.UseVisualStyleBackColor = true;
+            btnMinimize.Visible = false;
             btnMinimize.Click += btnMinimize_Click;
             // 
             // btnSair
@@ -98,6 +106,7 @@
             btnSair.TabIndex = 26;
             btnSair.Text = "Sair";
             btnSair.UseVisualStyleBackColor = true;
+            btnSair.Visible = false;
             btnSair.Click += btnSair_Click;
             // 
             // btnConfigurar
@@ -108,7 +117,52 @@
             btnConfigurar.TabIndex = 27;
             btnConfigurar.Text = "Configurar";
             btnConfigurar.UseVisualStyleBackColor = true;
+            btnConfigurar.Visible = false;
             btnConfigurar.Click += button1_Click;
+            // 
+            // mnu
+            // 
+            mnu.Items.AddRange(new ToolStripItem[] { menu });
+            mnu.Location = new Point(0, 0);
+            mnu.Name = "mnu";
+            mnu.Size = new Size(1039, 24);
+            mnu.TabIndex = 29;
+            mnu.Text = "menuStrip1";
+            // 
+            // menu
+            // 
+            menu.DropDownItems.AddRange(new ToolStripItem[] { mnuCadastrarEquipamento, mnuConfiguracao, mnuMinimizar, mnuSair });
+            menu.Name = "menu";
+            menu.Size = new Size(50, 20);
+            menu.Text = "Menu";
+            // 
+            // mnuCadastrarEquipamento
+            // 
+            mnuCadastrarEquipamento.Name = "mnuCadastrarEquipamento";
+            mnuCadastrarEquipamento.Size = new Size(198, 22);
+            mnuCadastrarEquipamento.Text = "Cadastrar Equipamento";
+            mnuCadastrarEquipamento.Click += mnuCadastrarEquipamento_Click;
+            // 
+            // mnuConfiguracao
+            // 
+            mnuConfiguracao.Name = "mnuConfiguracao";
+            mnuConfiguracao.Size = new Size(198, 22);
+            mnuConfiguracao.Text = "Configuração";
+            mnuConfiguracao.Click += mnuConfiguracao_Click;
+            // 
+            // mnuMinimizar
+            // 
+            mnuMinimizar.Name = "mnuMinimizar";
+            mnuMinimizar.Size = new Size(198, 22);
+            mnuMinimizar.Text = "Minimizar";
+            mnuMinimizar.Click += mnuMinimizar_Click;
+            // 
+            // mnuSair
+            // 
+            mnuSair.Name = "mnuSair";
+            mnuSair.Size = new Size(198, 22);
+            mnuSair.Text = "Sair";
+            mnuSair.Click += mnuSair_Click;
             // 
             // frmPrincipal
             // 
@@ -123,10 +177,14 @@
             Controls.Add(lstMensagemDispositivosConectados);
             Controls.Add(lstMensagem);
             Controls.Add(label4);
+            Controls.Add(mnu);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MainMenuStrip = mnu;
             Name = "frmPrincipal";
             Text = "Form1";
             Load += Form1_Load;
+            mnu.ResumeLayout(false);
+            mnu.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -137,6 +195,12 @@
         private Button btnMinimize;
         private Button btnSair;
         private Button btnConfigurar;
+        private MenuStrip mnu;
+        private ToolStripMenuItem menu;
+        private ToolStripMenuItem mnuCadastrarEquipamento;
+        private ToolStripMenuItem mnuConfiguracao;
+        private ToolStripMenuItem mnuMinimizar;
+        private ToolStripMenuItem mnuSair;
         public static ListBox lstMensagemDispositivosConectados;
         public static ListBox lstMensagem;
     }

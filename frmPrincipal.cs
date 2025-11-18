@@ -19,6 +19,7 @@ using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Microsoft.VisualBasic;
 using ControladoraGaren;
+using ControladoraGaren.CLASSES;
 
 namespace WinFormsApp1
 
@@ -34,12 +35,14 @@ namespace WinFormsApp1
         private static int portaServidor;
         private static int timeSpan;
 
-         static frmPrincipal()
+        static frmPrincipal()
         {
-
-            CarregarListaEquipamento();
-            CarregaConfigGaren();
-            iniciaComunicacaoComGarenEGerenciador();
+            
+            //CarregarListaEquipamento();
+            //ControladoraGaren.CLASSES.AcessoDbSqlite.CriarTabelaSQlite(this);
+            //CarregarListaEquipamentoSqLite();
+            //CarregaConfigGaren();
+            //iniciaComunicacaoComGarenEGerenciador();
         }
 
         public static void iniciaComunicacaoComGarenEGerenciador()
@@ -56,11 +59,43 @@ namespace WinFormsApp1
             }
 
         }
+        public void CriarPastaSeNaoExiste()
+        {
+
+            string caminhoDaPasta = "c:\\sistema\\controladoraGaren\\bancoSqLite";
+           
+            //string caminhoDaPasta= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bancoSqLite");
+            // 1. Verificar se a pasta já existe
+            if (!Directory.Exists(caminhoDaPasta))
+            {
+                // 2. Se a pasta NÃO existe, ela é criada
+                try
+                {
+                    Directory.CreateDirectory(caminhoDaPasta);
+                    MessageBox.Show($"Pasta criada com sucesso em: {caminhoDaPasta}");
+                }
+                catch (Exception ex)
+                {
+                    // Tratar possíveis erros (ex: permissão negada, caminho inválido)
+                    MessageBox.Show($"Erro ao criar a pasta: {ex.Message}");
+                }
+            }
+            else
+            {
+                //Console.WriteLine($"A pasta já existe em: {caminhoDaPasta}");
+            }
+        }
 
 
         public frmPrincipal()
         {
             InitializeComponent();
+            CriarPastaSeNaoExiste();
+            ControladoraGaren.CLASSES.AcessoDbSqlite.CriarTabelaSQlite(this);
+            CarregarListaEquipamentoSqLite();
+            CarregaConfigGaren();
+            iniciaComunicacaoComGarenEGerenciador();
+
 
 
 
@@ -84,6 +119,31 @@ namespace WinFormsApp1
                     direcao = row["direcao"].ToString(),
                     rele = Convert.ToInt32(row["rele"]),
                     tempoARele = Convert.ToDouble(row["tempoARele"])
+
+                };
+                list.Add(disposito);
+
+            }
+
+
+        }
+
+        public static void CarregarListaEquipamentoSqLite()
+        {
+            DataTable dt = AcessoDbSqlite.CarregaListaEquipamento();
+            foreach (DataRow row in dt.Rows)
+            {
+                Dispositivo disposito = new Dispositivo
+                {
+
+
+                    codigo = Convert.ToInt32(row["codigo"]),
+                    ip = row["Ip Controladora"].ToString(),
+                    idControladora = row["Id Controladora"].ToString(),
+                    equipamentoAtrelado = row["Equipamento"].ToString(),
+                    direcao = row["Direcao"].ToString(),
+                    rele = Convert.ToInt32(row["Rele"]),
+                    tempoARele = Convert.ToDouble(row["Tempo"])
 
                 };
                 list.Add(disposito);
@@ -164,7 +224,7 @@ namespace WinFormsApp1
             string valorDigitado = Interaction.InputBox(
                 "Digite a Senha Para Sair", // Prompt (Texto dentro da caixa)
                 "Senha c1234"      // Título da caixa
-                                    // Valor padrão no campo
+                                   // Valor padrão no campo
             );
 
             if (string.IsNullOrEmpty(valorDigitado))
@@ -203,6 +263,8 @@ namespace WinFormsApp1
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             //this.TopMost = true;
+
+       
 
 
 
@@ -245,10 +307,37 @@ namespace WinFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             this.TopMost = false;
-            frmConfiguracao frm = new frmConfiguracao();    
+            frmConfiguracao frm = new frmConfiguracao();
             frm.ShowDialog();
             this.TopMost = true;
             //Close(); 
+        }
+
+        private void mnuConfiguracao_Click(object sender, EventArgs e)
+        {
+            this.TopMost = false;
+            frmConfiguracao frm = new frmConfiguracao();
+            frm.ShowDialog();
+            this.TopMost = true;
+        }
+
+        private void mnuMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void mnuSair_Click(object sender, EventArgs e)
+        {
+            this.TopMost = false;
+            abrirDialog();
+        }
+
+        private void mnuCadastrarEquipamento_Click(object sender, EventArgs e)
+        {
+            this.TopMost = false;
+            frmCadastroControladoraEquipamento frm = new frmCadastroControladoraEquipamento();
+            frm.ShowDialog();
+            this.TopMost = true;
         }
     }
 }

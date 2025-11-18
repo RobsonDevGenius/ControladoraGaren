@@ -39,7 +39,7 @@
             // btnSalvar
             // 
             btnSalvar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnSalvar.Location = new Point(396, 137);
+            btnSalvar.Location = new Point(461, 137);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(75, 31);
             btnSalvar.TabIndex = 0;
@@ -70,14 +70,14 @@
             // 
             // txtPorta
             // 
-            txtPorta.Location = new Point(171, 58);
+            txtPorta.Location = new Point(236, 58);
             txtPorta.Name = "txtPorta";
             txtPorta.Size = new Size(133, 23);
             txtPorta.TabIndex = 3;
             // 
             // txtIp
             // 
-            txtIp.Location = new Point(171, 18);
+            txtIp.Location = new Point(236, 18);
             txtIp.Name = "txtIp";
             txtIp.Size = new Size(133, 23);
             txtIp.TabIndex = 4;
@@ -97,7 +97,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(486, 180);
+            ClientSize = new Size(548, 180);
             Controls.Add(label3);
             Controls.Add(txtIp);
             Controls.Add(txtPorta);
