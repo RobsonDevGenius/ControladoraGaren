@@ -35,12 +35,13 @@
             txtIp = new TextBox();
             label3 = new Label();
             chkGravarPacotesEmArquivo = new CheckBox();
+            chkBancoDadosLocal = new CheckBox();
             SuspendLayout();
             // 
             // btnSalvar
             // 
             btnSalvar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnSalvar.Location = new Point(461, 205);
+            btnSalvar.Location = new Point(461, 216);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(75, 31);
             btnSalvar.TabIndex = 0;
@@ -73,14 +74,14 @@
             // 
             txtPorta.Location = new Point(236, 58);
             txtPorta.Name = "txtPorta";
-            txtPorta.Size = new Size(133, 23);
+            txtPorta.Size = new Size(187, 23);
             txtPorta.TabIndex = 3;
             // 
             // txtIp
             // 
             txtIp.Location = new Point(236, 18);
             txtIp.Name = "txtIp";
-            txtIp.Size = new Size(133, 23);
+            txtIp.Size = new Size(187, 23);
             txtIp.TabIndex = 4;
             // 
             // label3
@@ -88,7 +89,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label3.ForeColor = Color.Red;
-            label3.Location = new Point(12, 169);
+            label3.Location = new Point(12, 181);
             label3.Name = "label3";
             label3.Size = new Size(459, 21);
             label3.TabIndex = 5;
@@ -105,11 +106,23 @@
             chkGravarPacotesEmArquivo.Text = "Gravar Pacotes em Arquivo txt";
             chkGravarPacotesEmArquivo.UseVisualStyleBackColor = true;
             // 
+            // chkBancoDadosLocal
+            // 
+            chkBancoDadosLocal.AutoSize = true;
+            chkBancoDadosLocal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            chkBancoDadosLocal.Location = new Point(12, 127);
+            chkBancoDadosLocal.Name = "chkBancoDadosLocal";
+            chkBancoDadosLocal.Size = new Size(195, 25);
+            chkBancoDadosLocal.TabIndex = 8;
+            chkBancoDadosLocal.Text = "Banco de Dados Local";
+            chkBancoDadosLocal.UseVisualStyleBackColor = true;
+            // 
             // frmConfiguracao
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(548, 248);
+            ClientSize = new Size(552, 259);
+            Controls.Add(chkBancoDadosLocal);
             Controls.Add(chkGravarPacotesEmArquivo);
             Controls.Add(label3);
             Controls.Add(txtIp);
@@ -133,5 +146,6 @@
         private TextBox txtIp;
         private Label label3;
         private CheckBox chkGravarPacotesEmArquivo;
+        private CheckBox chkBancoDadosLocal;
     }
 }

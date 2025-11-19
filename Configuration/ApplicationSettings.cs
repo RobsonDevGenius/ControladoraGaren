@@ -13,6 +13,7 @@ public class ApplicationSettings
     public const string DefaultStringConexao = "Data Source =.\\sqlexpress;Initial Catalog=Automacao;Persist Security Info=True; User ID = sa ;Password=325014;";
     public const int DefaultTimeSpan = 10;
     public const int DefaultGravaLogLoop = 0;
+    public const int DefaultBancoDadosLocal = 0;    
 
     public string ApplicationName {  get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
@@ -25,4 +26,6 @@ public class ApplicationSettings
     public int TimeSpan { get; set; } = DefaultTimeSpan;
 
     public int GravaLogLoop { get; set; } = DefaultGravaLogLoop;
+
+    public int BancoDadosLocal { get; set; } = DefaultBancoDadosLocal;
 }

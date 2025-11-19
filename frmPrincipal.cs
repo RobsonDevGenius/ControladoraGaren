@@ -31,13 +31,14 @@ namespace WinFormsApp1
         private DateTime dataHora = DateTime.MinValue;
         private static Negocio negocio = new Negocio();
         public static ListDispositivo<Dispositivo> list = [];
-        private static string ipServidor;
+        private static string ipServidor ;
         private static int portaServidor;
         private static int timeSpan;
         private GarenGateway garenGateway = new GarenGateway();
         private static int CONTADORMSGLOOP = 0;
         private static string caminhoArquivoLogLoop;
         private static int gravaLogLoop = 0;
+        private static int bancoDadosLocal = 0;
         private static StreamWriter sr = new StreamWriter("Robson");
 
 
@@ -70,107 +71,66 @@ namespace WinFormsApp1
             {
 
 
-                // Acessamos a variável global/membro CONTADORMSGLOOP
-                CONTADORMSGLOOP = CONTADORMSGLOOP + 1; // Pode ser escrito como CONTADORMSGLOOP++;
+                
+            CONTADORMSGLOOP = CONTADORMSGLOOP + 1; 
 
-            // if (CONTADORMSGLOOP > 10000)
-            if (CONTADORMSGLOOP > 2)
+            if (CONTADORMSGLOOP > 10000)
             {
 
-                // Chamada ao método global/membro
+               
                 CriaOutroArquivoTxt();
                 CONTADORMSGLOOP = 0;
             }
 
             sr.Close();
 
-            // O VB.NET usa If gravaLogLoop = "1" Then. Em C#, usamos if (gravaLogLoop == "1")
            
-                // Variável não é realmente usada na lógica Try/Catch original, mas mantida por fidelidade
                 int numeroResultado;
 
                 try
                 {
-                    // O código VB.NET original está usando uma variável 'sr' (StreamWriter) globalmente 
-                    // e gerenciando o fechamento/abertura manualmente. Isso pode ser problemático.
-                    // A melhor prática em C# (e VB.NET) para escrever em arquivos é usar a classe File estática 
-                    // ou o comando 'using' para garantir que o Stream seja fechado.
-
-                    // Usando File.AppendAllText() simplifica o processo (melhor prática):
-                    // File.AppendAllText(caminhoAux, mensagem + Environment.NewLine); 
-
-                    // Para ser mais fiel à lógica original de usar um StreamWriter (StreamWriter sr = ...):
-                    // OBS: Não é necessário fazer sr.Close() e reabrir com File.AppendText(). 
-                    // O File.AppendText já cria/abre o StreamWriter no modo append.
+                  
 
                     using (StreamWriter sw = File.AppendText(caminhoArquivoLogLoop))
                     {
                         sw.WriteLine(mensagem);
-                    } // O 'using' garante que sw.Close() seja chamado automaticamente, mesmo em caso de erro.
+                    } 
 
-                    numeroResultado = 0; // Supondo sucesso
+                    numeroResultado = 0; 
                 }
                 catch (Exception ex)
                 {
-                    // Em C#, a variável 'numeroResultado' deve ser inicializada ou definida antes de ser usada.
-                    // Aqui, apenas a definimos dentro do catch, como na lógica VB.NET.
+                  
                     numeroResultado = 1;
 
-                    // Em uma aplicação real, você deve logar o 'ex' para saber o que aconteceu!
-                    // Console.WriteLine($"Erro ao escrever no arquivo: {ex.Message}");
                 }
 
-                //// Acessamos a variável global/membro CONTADORMSGLOOP
-                //CONTADORMSGLOOP = CONTADORMSGLOOP + 1; // Pode ser escrito como CONTADORMSGLOOP++;
-
-                //// if (CONTADORMSGLOOP > 10000)
-                //if (CONTADORMSGLOOP > 2)
-                //{
-                   
-                //    // Chamada ao método global/membro
-                //    CriaOutroArquivoTxt();
-                //    CONTADORMSGLOOP = 0;
-                //}
+               
             }
         }
 
         public static void CriaOutroArquivoTxt()
         {
-            // 1. Formatar a data e hora atual.
-            // Em C#, usamos DateTime.Now e o método ToString() com o formato desejado.
+          
             string dataformatada = DateTime.Now.ToString("dd.MM.yyyy HH.mm.ss");
             
 
-            // 2. Definir o novo caminho do arquivo.
-            // string novoCaminhoAux = @"C:\SISTEMA\LOGLOOP\logLoop" + dataformatada + ".txt";
+         
 
             string novoCaminhoAux = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LogLoop\\" + dataformatada + ".txt");
 
 
 
-            // 3. Estrutura de Verificação e Criação.
-            // O código VB.NET original verifica se 'caminho' existe e, se não, faz a mesma coisa.
-            // Isso pode ser drasticamente simplificado em C# (e VB.NET) eliminando a verificação
-            // e apenas criando o arquivo diretamente no novo caminho 'novoCaminhoAux'.
-
-            // O VB.NET original:
-            // If File.Exists(caminho) Then ... End If
-            // If Not File.Exists(caminho) Then ... End If
-
-            // Simplificado em C# (e mais eficiente):
-
-            // Atualiza a variável global/membro 'caminhoAux' para o novo arquivo
+        
             caminhoArquivoLogLoop = novoCaminhoAux;
 
-            // File.Create(caminhoAux) cria o arquivo. O 'using' garante que o FileStream seja liberado.
+          
             using (FileStream fs = File.Create(caminhoArquivoLogLoop))
             {
                 // Este bloco fica vazio pois o objetivo é apenas criar e fechar o arquivo.
             }
 
-            // 4. Atribuir o novo StreamWriter ao objeto 'sr'.
-            // O VB.NET usava sr = File.AppendText(caminhoAux)
-            // Em C#, 'sr' é provavelmente um System.IO.StreamWriter.
+          
             sr = File.AppendText(caminhoArquivoLogLoop);
         }
 
@@ -196,6 +156,7 @@ namespace WinFormsApp1
             string caminhoDaPasta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bancoSqLite");
 
             //string caminhoDaPasta= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bancoSqLite");
+
             // 1. Verificar se a pasta já existe
             if (!Directory.Exists(caminhoDaPasta))
             {
@@ -213,7 +174,7 @@ namespace WinFormsApp1
             }
             else
             {
-                //Console.WriteLine($"A pasta já existe em: {caminhoDaPasta}");
+               
             }
         }
 
@@ -243,17 +204,30 @@ namespace WinFormsApp1
         public frmPrincipal()
         {
             InitializeComponent();
-            CriarPastaBancoDeDadosSeNaoExiste();            
-            ControladoraGaren.CLASSES.AcessoDbSqlite.CriarTabelaSQlite(this);
-            CarregarListaEquipamentoSqLite();
+            
             CarregaConfigGaren();
 
             if (gravaLogLoop == 1)
             {
                 CriarPastaLogLoopSeNaoExiste();
             }
-           
-            iniciaComunicacaoComGarenEGerenciador();
+
+            if (bancoDadosLocal == 1)
+            {
+                CriarPastaBancoDeDadosSeNaoExiste();
+                ControladoraGaren.CLASSES.AcessoDbSqlite.CriarTabelaSQlite(this);
+                CarregarListaEquipamentoSqLite();
+
+            }
+            else
+            {
+                CarregarListaEquipamento();
+            }
+
+
+
+
+                iniciaComunicacaoComGarenEGerenciador();
 
 
 
@@ -314,26 +288,13 @@ namespace WinFormsApp1
 
         public static void CarregaConfigGaren()
         {
-            var appSettings = AppSettings.Settings.ApplicationSettings;
-            //Text = appSettings.ApplicationName + " - " + appSettings.BackendIp;
+            var appSettings = AppSettings.Settings.ApplicationSettings;           
             ipServidor = appSettings.BackendIp;
             portaServidor = appSettings.BackendPort;
             timeSpan = appSettings.TimeSpan;
             gravaLogLoop = appSettings.GravaLogLoop;
+            bancoDadosLocal = appSettings.BancoDadosLocal;
 
-           
-
-
-
-            //DataTable dt = negocio.CarregaConfiguracaoGaren();
-            //foreach (DataRow row in dt.Rows)
-            //{
-
-            //    timeSpan = Convert.ToInt32(row["timeSpan"]);
-            //    ipServidor = row["ipServidor"].ToString();
-            //    portaServidor = Convert.ToInt32(row["portaServidor"].ToString());
-
-            //}
 
         }
 
@@ -432,11 +393,7 @@ namespace WinFormsApp1
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            //var appSettings = AppSettings.Settings.ApplicationSettings;
-            //Text = appSettings.ApplicationName + " - " + appSettings.BackendIp;
-            //ipServidor = appSettings.BackendIp;
-            //portaServidor = appSettings.BackendPort;
-            //timeSpan = appSettings.TimeSpan;
+           
             VerificarSeAplicativoJaEstaAberto("ControladoraGaren");
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

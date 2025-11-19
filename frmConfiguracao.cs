@@ -47,6 +47,7 @@ namespace ControladoraGaren
                 txtPorta.Text = config.BackendPort.ToString(); // Assumindo NumericUpDown
 
                int gravarLogLoop = config.GravaLogLoop;
+               int bancoDadosLocal = config.BancoDadosLocal;
 
                 if (gravarLogLoop == 0)
                 {
@@ -55,6 +56,15 @@ namespace ControladoraGaren
                 else
                 {
                     chkGravarPacotesEmArquivo.Checked = true;
+                }
+
+                if (bancoDadosLocal == 0)
+                {
+                    chkBancoDadosLocal.Checked = false;
+                }
+                else
+                {
+                    chkBancoDadosLocal.Checked = true;
                 }
 
             }
@@ -66,7 +76,7 @@ namespace ControladoraGaren
 
             DialogResult resultado = MessageBox.Show(
     "Deseja realmente alterar as informações ?", // Mensagem
-    "Confirmação de Exclusão",                                         // Título
+    "Confirmação",                                         // Título
     MessageBoxButtons.YesNo,                                     // Botões
     MessageBoxIcon.Warning                                             // Ícone
 );
@@ -90,15 +100,25 @@ namespace ControladoraGaren
                     jsonObj["ApplicationSettings"]["GravaLogLoop"] = 0;
                 }
 
+                if (chkBancoDadosLocal.Checked)
+                {
+                    jsonObj["ApplicationSettings"]["BancoDadosLocal"] = 1;
+                }
+                else
+                {
+                    jsonObj["ApplicationSettings"]["BancoDadosLocal"] = 0;
+                }
 
 
 
 
-                    // Opcional: Salvar em um objeto fortemente tipado antes de serializar
-                    // ...
 
-                    // Serializa de volta para string formatada
-                    string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+
+                // Opcional: Salvar em um objeto fortemente tipado antes de serializar
+                // ...
+
+                // Serializa de volta para string formatada
+                string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
 
                 // Escreve de volta no arquivo
                 File.WriteAllText("appsettings.json", output);
