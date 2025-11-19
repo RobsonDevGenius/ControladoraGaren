@@ -65,9 +65,27 @@ namespace WinFormsApp1
 
         public static void EscreverTextoTxt(string mensagem)
         {
-            // O VB.NET usa If gravaLogLoop = "1" Then. Em C#, usamos if (gravaLogLoop == "1")
+
             if (gravaLogLoop == 1)
             {
+
+
+                // Acessamos a variável global/membro CONTADORMSGLOOP
+                CONTADORMSGLOOP = CONTADORMSGLOOP + 1; // Pode ser escrito como CONTADORMSGLOOP++;
+
+            // if (CONTADORMSGLOOP > 10000)
+            if (CONTADORMSGLOOP > 2)
+            {
+
+                // Chamada ao método global/membro
+                CriaOutroArquivoTxt();
+                CONTADORMSGLOOP = 0;
+            }
+
+            sr.Close();
+
+            // O VB.NET usa If gravaLogLoop = "1" Then. Em C#, usamos if (gravaLogLoop == "1")
+           
                 // Variável não é realmente usada na lógica Try/Catch original, mas mantida por fidelidade
                 int numeroResultado;
 
@@ -102,17 +120,17 @@ namespace WinFormsApp1
                     // Console.WriteLine($"Erro ao escrever no arquivo: {ex.Message}");
                 }
 
-                // Acessamos a variável global/membro CONTADORMSGLOOP
-                CONTADORMSGLOOP = CONTADORMSGLOOP + 1; // Pode ser escrito como CONTADORMSGLOOP++;
+                //// Acessamos a variável global/membro CONTADORMSGLOOP
+                //CONTADORMSGLOOP = CONTADORMSGLOOP + 1; // Pode ser escrito como CONTADORMSGLOOP++;
 
-                // if (CONTADORMSGLOOP > 10000)
-                if (CONTADORMSGLOOP > 2)
-                {
+                //// if (CONTADORMSGLOOP > 10000)
+                //if (CONTADORMSGLOOP > 2)
+                //{
                    
-                    // Chamada ao método global/membro
-                    CriaOutroArquivoTxt();
-                    CONTADORMSGLOOP = 0;
-                }
+                //    // Chamada ao método global/membro
+                //    CriaOutroArquivoTxt();
+                //    CONTADORMSGLOOP = 0;
+                //}
             }
         }
 
@@ -170,7 +188,7 @@ namespace WinFormsApp1
             }
 
         }
-        public void CriarPastaSeNaoExiste()
+        public void CriarPastaBancoDeDadosSeNaoExiste()
         {
 
            // string caminhoDaPasta = "c:\\sistema\\controladoraGaren\\bancoSqLite";
@@ -225,11 +243,16 @@ namespace WinFormsApp1
         public frmPrincipal()
         {
             InitializeComponent();
-            CriarPastaSeNaoExiste();
-            CriarPastaLogLoopSeNaoExiste();
+            CriarPastaBancoDeDadosSeNaoExiste();            
             ControladoraGaren.CLASSES.AcessoDbSqlite.CriarTabelaSQlite(this);
             CarregarListaEquipamentoSqLite();
             CarregaConfigGaren();
+
+            if (gravaLogLoop == 1)
+            {
+                CriarPastaLogLoopSeNaoExiste();
+            }
+           
             iniciaComunicacaoComGarenEGerenciador();
 
 
@@ -298,7 +321,7 @@ namespace WinFormsApp1
             timeSpan = appSettings.TimeSpan;
             gravaLogLoop = appSettings.GravaLogLoop;
 
-            gravaLogLoop = 1;
+           
 
 
 

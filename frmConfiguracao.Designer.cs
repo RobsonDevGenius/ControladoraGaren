@@ -34,12 +34,13 @@
             txtPorta = new TextBox();
             txtIp = new TextBox();
             label3 = new Label();
+            chkGravarPacotesEmArquivo = new CheckBox();
             SuspendLayout();
             // 
             // btnSalvar
             // 
             btnSalvar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnSalvar.Location = new Point(461, 137);
+            btnSalvar.Location = new Point(461, 205);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(75, 31);
             btnSalvar.TabIndex = 0;
@@ -87,17 +88,29 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label3.ForeColor = Color.Red;
-            label3.Location = new Point(12, 99);
+            label3.Location = new Point(12, 169);
             label3.Name = "label3";
             label3.Size = new Size(459, 21);
             label3.TabIndex = 5;
             label3.Text = "Para que as configurações sejam salvas reinicie a aplicação";
             // 
+            // chkGravarPacotesEmArquivo
+            // 
+            chkGravarPacotesEmArquivo.AutoSize = true;
+            chkGravarPacotesEmArquivo.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            chkGravarPacotesEmArquivo.Location = new Point(12, 96);
+            chkGravarPacotesEmArquivo.Name = "chkGravarPacotesEmArquivo";
+            chkGravarPacotesEmArquivo.Size = new Size(260, 25);
+            chkGravarPacotesEmArquivo.TabIndex = 7;
+            chkGravarPacotesEmArquivo.Text = "Gravar Pacotes em Arquivo txt";
+            chkGravarPacotesEmArquivo.UseVisualStyleBackColor = true;
+            // 
             // frmConfiguracao
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(548, 180);
+            ClientSize = new Size(548, 248);
+            Controls.Add(chkGravarPacotesEmArquivo);
             Controls.Add(label3);
             Controls.Add(txtIp);
             Controls.Add(txtPorta);
@@ -119,5 +132,6 @@
         private TextBox txtPorta;
         private TextBox txtIp;
         private Label label3;
+        private CheckBox chkGravarPacotesEmArquivo;
     }
 }

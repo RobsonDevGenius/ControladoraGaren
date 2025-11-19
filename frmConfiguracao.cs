@@ -46,6 +46,17 @@ namespace ControladoraGaren
                 txtIp.Text = config.BackendIp;
                 txtPorta.Text = config.BackendPort.ToString(); // Assumindo NumericUpDown
 
+               int gravarLogLoop = config.GravaLogLoop;
+
+                if (gravarLogLoop == 0)
+                {
+                    chkGravarPacotesEmArquivo.Checked = false;  
+                }
+                else
+                {
+                    chkGravarPacotesEmArquivo.Checked = true;
+                }
+
             }
         }
 
@@ -70,11 +81,24 @@ namespace ControladoraGaren
                 jsonObj["ApplicationSettings"]["BackendIp"] = txtIp.Text;
                 jsonObj["ApplicationSettings"]["BackendPort"] = txtPorta.Text;
 
-                // Opcional: Salvar em um objeto fortemente tipado antes de serializar
-                // ...
+                if (chkGravarPacotesEmArquivo.Checked)
+                {
+                    jsonObj["ApplicationSettings"]["GravaLogLoop"] = 1;
+                }
+                else
+                {
+                    jsonObj["ApplicationSettings"]["GravaLogLoop"] = 0;
+                }
 
-                // Serializa de volta para string formatada
-                string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+
+
+
+
+                    // Opcional: Salvar em um objeto fortemente tipado antes de serializar
+                    // ...
+
+                    // Serializa de volta para string formatada
+                    string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
 
                 // Escreve de volta no arquivo
                 File.WriteAllText("appsettings.json", output);
