@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinFormsApp1.CLASSES;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WinFormsApp1.CLASSES;
 
@@ -27,6 +28,7 @@ public class GarenGateway
     private readonly string _ipControladora;
     private readonly string _ipGerenciador;
     private readonly int _portGerenciador;
+    //public  event EventHandler<string> EscreveNoList;
 
     public GarenGateway()
     {
@@ -148,7 +150,7 @@ public class GarenGateway
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"[Equipamento {_idEquipamento} / Controladora {_idControladora}] Erro ao conectar na controladora: {ex.Message}");
+            //Debug.WriteLine($"[Equipamento {_idEquipamento} / Controladora {_idControladora}] Erro ao conectar na controladora: {ex.Message}");
             return false;
         }
 
@@ -272,41 +274,56 @@ public class GarenGateway
     }
     public async Task  RecebeMensagemGerenciador(string mensagem)
     {
-        string[] words = mensagem.Split("|");
-        string pacote = words[1];
-        string dispositivo = words[2];
 
-        Dispositivo dispositivoRetorno = PegaEquipamentoReferenteId(dispositivo);
+       // EscreveNoList(0,DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " - Recebe    : " + mensagem);
 
-        if (pacote == "3002")
+    frmPrincipal.escreveNoListBox(frmPrincipal.lstMensagensTrocadas, DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " - Recebe    : " + mensagem);
+
+
+        try
         {
+
+
+            string[] words = mensagem.Split("|");
+            string pacote = words[1];
+            string dispositivo = words[2];
+
+            Dispositivo dispositivoRetorno = PegaEquipamentoReferenteId(dispositivo);
+
+            if (pacote == "3002")
+            {
 
                 await ProcessaComandoAcionamentoRemoto(dispositivoRetorno.rele, dispositivoRetorno.tempoARele, dispositivoRetorno.ip);
 
-        }
+            }
 
-        if (pacote == "3003")
-        {
+            if (pacote == "3003")
+            {
 
                 await ProcessaComandoAcionamentoRemoto(dispositivoRetorno.rele, dispositivoRetorno.tempoARele, dispositivoRetorno.ip);
 
+            }
+
+
+            if (pacote == "1000")
+            {
+                await EnviaMensagem($"|1001|{_idEquipamento}|");
+
+            }
+
+            if (pacote == "1002")
+            {
+                dispositivoRetorno = PegaControladoraReferenteEquipamento(dispositivo);
+
+                await ProcessaComandoAcionamentoRemoto(dispositivoRetorno.rele, dispositivoRetorno.tempoARele, dispositivoRetorno.ip);
+
+            }
+
         }
-
-
-        if (pacote == "1000")
+        catch (Exception ex)
         {
-            await EnviaMensagem($"|1001|{_idEquipamento}|");
-
+            frmPrincipal.escreveNoListBox(frmPrincipal.lstMensagensTrocadas, ex.Message);
         }
-
-        if (pacote == "1002")
-        {
-            dispositivoRetorno = PegaControladoraReferenteEquipamento(dispositivo);
-           
-            await ProcessaComandoAcionamentoRemoto(dispositivoRetorno.rele, dispositivoRetorno.tempoARele, dispositivoRetorno.ip);
-
-        }
-
 
 
     }
@@ -407,10 +424,12 @@ public class GarenGateway
 
     public async Task EnviaMensagem(string msg)
     {
+        frmPrincipal.escreveNoListBox(frmPrincipal.lstMensagensTrocadas,DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " - Envia     : "+ msg);
+
 
         try
         {
-       
+            
 
             var stream = _clientGerenciador.GetStream();
             byte[] data = Encoding.UTF8.GetBytes(msg);

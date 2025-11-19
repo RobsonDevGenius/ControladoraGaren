@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             label4 = new Label();
-            lstMensagem = new ListBox();
-            lstMensagemDispositivosConectados = new ListBox();
             btnLimparLists = new Button();
             btnMinimize = new Button();
             btnSair = new Button();
@@ -41,7 +39,18 @@
             mnuConfiguracao = new ToolStripMenuItem();
             mnuMinimizar = new ToolStripMenuItem();
             mnuSair = new ToolStripMenuItem();
+            tabControl = new TabControl();
+            tbpDispConectados = new TabPage();
+            lstMensagem = new ListBox();
+            lstMensagemDispositivosConectados = new ListBox();
+            tbpMensagensTrocadas = new TabPage();
+            btnLimparHistorico = new Button();
+            btnCopiarHistorico = new Button();
+            lstMensagensTrocadas = new ListBox();
             mnu.SuspendLayout();
+            tabControl.SuspendLayout();
+            tbpDispConectados.SuspendLayout();
+            tbpMensagensTrocadas.SuspendLayout();
             SuspendLayout();
             // 
             // label4
@@ -49,37 +58,15 @@
             label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(434, 9);
+            label4.Location = new Point(435, 34);
             label4.Name = "label4";
             label4.Size = new Size(187, 30);
             label4.TabIndex = 8;
             label4.Text = "CONTROLADORA";
             // 
-            // lstMensagem
-            // 
-            lstMensagem.FormattingEnabled = true;
-            lstMensagem.HorizontalScrollbar = true;
-            lstMensagem.ItemHeight = 15;
-            lstMensagem.Location = new Point(533, 47);
-            lstMensagem.Name = "lstMensagem";
-            lstMensagem.ScrollAlwaysVisible = true;
-            lstMensagem.Size = new Size(482, 454);
-            lstMensagem.TabIndex = 11;
-            // 
-            // lstMensagemDispositivosConectados
-            // 
-            lstMensagemDispositivosConectados.FormattingEnabled = true;
-            lstMensagemDispositivosConectados.HorizontalScrollbar = true;
-            lstMensagemDispositivosConectados.ItemHeight = 15;
-            lstMensagemDispositivosConectados.Location = new Point(24, 47);
-            lstMensagemDispositivosConectados.Name = "lstMensagemDispositivosConectados";
-            lstMensagemDispositivosConectados.ScrollAlwaysVisible = true;
-            lstMensagemDispositivosConectados.Size = new Size(482, 454);
-            lstMensagemDispositivosConectados.TabIndex = 23;
-            // 
             // btnLimparLists
             // 
-            btnLimparLists.Location = new Point(24, 527);
+            btnLimparLists.Location = new Point(16, 527);
             btnLimparLists.Name = "btnLimparLists";
             btnLimparLists.Size = new Size(131, 23);
             btnLimparLists.TabIndex = 24;
@@ -164,18 +151,108 @@
             mnuSair.Text = "Sair";
             mnuSair.Click += mnuSair_Click;
             // 
+            // tabControl
+            // 
+            tabControl.Controls.Add(tbpDispConectados);
+            tabControl.Controls.Add(tbpMensagensTrocadas);
+            tabControl.Location = new Point(12, 67);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(1003, 454);
+            tabControl.TabIndex = 30;
+            // 
+            // tbpDispConectados
+            // 
+            tbpDispConectados.Controls.Add(lstMensagem);
+            tbpDispConectados.Controls.Add(lstMensagemDispositivosConectados);
+            tbpDispConectados.Location = new Point(4, 24);
+            tbpDispConectados.Name = "tbpDispConectados";
+            tbpDispConectados.Padding = new Padding(3);
+            tbpDispConectados.Size = new Size(995, 426);
+            tbpDispConectados.TabIndex = 0;
+            tbpDispConectados.Text = "Dispositivos Conectados";
+            tbpDispConectados.UseVisualStyleBackColor = true;
+            // 
+            // lstMensagem
+            // 
+            lstMensagem.FormattingEnabled = true;
+            lstMensagem.HorizontalScrollbar = true;
+            lstMensagem.ItemHeight = 15;
+            lstMensagem.Location = new Point(496, 6);
+            lstMensagem.Name = "lstMensagem";
+            lstMensagem.ScrollAlwaysVisible = true;
+            lstMensagem.Size = new Size(482, 409);
+            lstMensagem.TabIndex = 25;
+            // 
+            // lstMensagemDispositivosConectados
+            // 
+            lstMensagemDispositivosConectados.FormattingEnabled = true;
+            lstMensagemDispositivosConectados.HorizontalScrollbar = true;
+            lstMensagemDispositivosConectados.ItemHeight = 15;
+            lstMensagemDispositivosConectados.Location = new Point(8, 6);
+            lstMensagemDispositivosConectados.Name = "lstMensagemDispositivosConectados";
+            lstMensagemDispositivosConectados.ScrollAlwaysVisible = true;
+            lstMensagemDispositivosConectados.Size = new Size(482, 409);
+            lstMensagemDispositivosConectados.TabIndex = 24;
+            // 
+            // tbpMensagensTrocadas
+            // 
+            tbpMensagensTrocadas.Controls.Add(btnLimparHistorico);
+            tbpMensagensTrocadas.Controls.Add(btnCopiarHistorico);
+            tbpMensagensTrocadas.Controls.Add(lstMensagensTrocadas);
+            tbpMensagensTrocadas.Location = new Point(4, 24);
+            tbpMensagensTrocadas.Name = "tbpMensagensTrocadas";
+            tbpMensagensTrocadas.Padding = new Padding(3);
+            tbpMensagensTrocadas.Size = new Size(995, 426);
+            tbpMensagensTrocadas.TabIndex = 1;
+            tbpMensagensTrocadas.Text = "Mensagens Trocadas";
+            tbpMensagensTrocadas.UseVisualStyleBackColor = true;
+            // 
+            // btnLimparHistorico
+            // 
+            btnLimparHistorico.Location = new Point(167, 6);
+            btnLimparHistorico.Name = "btnLimparHistorico";
+            btnLimparHistorico.Size = new Size(139, 23);
+            btnLimparHistorico.TabIndex = 34;
+            btnLimparHistorico.Text = "Limpar Historico";
+            btnLimparHistorico.UseVisualStyleBackColor = true;
+            btnLimparHistorico.Click += btnLimparHistorico_Click;
+            // 
+            // btnCopiarHistorico
+            // 
+            btnCopiarHistorico.Location = new Point(7, 6);
+            btnCopiarHistorico.Name = "btnCopiarHistorico";
+            btnCopiarHistorico.Size = new Size(137, 23);
+            btnCopiarHistorico.TabIndex = 33;
+            btnCopiarHistorico.Text = "Copiar Historico";
+            btnCopiarHistorico.UseVisualStyleBackColor = true;
+            btnCopiarHistorico.Click += btnCopiarHistorico_Click;
+            // 
+            // lstMensagensTrocadas
+            // 
+            lstMensagensTrocadas.DrawMode = DrawMode.OwnerDrawFixed;
+            lstMensagensTrocadas.Font = new Font("Courier New", 9F);
+            lstMensagensTrocadas.FormattingEnabled = true;
+            lstMensagensTrocadas.HorizontalScrollbar = true;
+            lstMensagensTrocadas.ItemHeight = 15;
+            lstMensagensTrocadas.Location = new Point(5, 35);
+            lstMensagensTrocadas.Name = "lstMensagensTrocadas";
+            lstMensagensTrocadas.ScrollAlwaysVisible = true;
+            lstMensagensTrocadas.Size = new Size(967, 349);
+            lstMensagensTrocadas.TabIndex = 32;
+            lstMensagensTrocadas.DrawItem += lstMensagensTrocadas_DrawItem;
+            // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1039, 611);
             ControlBox = false;
+            Controls.Add(tabControl);
             Controls.Add(btnConfigurar);
             Controls.Add(btnSair);
             Controls.Add(btnMinimize);
             Controls.Add(btnLimparLists);
-            Controls.Add(lstMensagemDispositivosConectados);
-            Controls.Add(lstMensagem);
             Controls.Add(label4);
             Controls.Add(mnu);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -185,6 +262,9 @@
             Load += Form1_Load;
             mnu.ResumeLayout(false);
             mnu.PerformLayout();
+            tabControl.ResumeLayout(false);
+            tbpDispConectados.ResumeLayout(false);
+            tbpMensagensTrocadas.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -201,7 +281,13 @@
         private ToolStripMenuItem mnuConfiguracao;
         private ToolStripMenuItem mnuMinimizar;
         private ToolStripMenuItem mnuSair;
-        public static ListBox lstMensagemDispositivosConectados;
+        private TabControl tabControl;
+        private TabPage tbpDispConectados;
+        private TabPage tbpMensagensTrocadas;
+        private Button btnLimparHistorico;
+        private Button btnCopiarHistorico;
         public static ListBox lstMensagem;
+        public static ListBox lstMensagemDispositivosConectados;
+        public static ListBox lstMensagensTrocadas;
     }
 }

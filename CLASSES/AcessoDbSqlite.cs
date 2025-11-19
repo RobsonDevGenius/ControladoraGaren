@@ -18,7 +18,11 @@ namespace ControladoraGaren.CLASSES
         { }
         private static SQLiteConnection DbConnection()
         {
-            sqliteConnection = new SQLiteConnection("Data Source=c:\\sistema\\controladoraGaren\\BancoSqLite\\Cadastro.sqlite; Version=3;");
+            // sqliteConnection = new SQLiteConnection("Data Source=c:\\sistema\\controladoraGaren\\BancoSqLite\\Cadastro.sqlite; Version=3;");
+
+            sqliteConnection = new SQLiteConnection ("Data Source =" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"BancoSqLite\\Cadastro.sqlite; Version = 3; "));
+
+
             sqliteConnection.Open();
             return sqliteConnection;
         }
@@ -26,9 +30,11 @@ namespace ControladoraGaren.CLASSES
         {
             try
             {
-                SQLiteConnection.CreateFile(@"c:\sistema\controladoraGaren\BancoSqLite\Cadastro.sqlite");
+                // SQLiteConnection.CreateFile(@"c:\sistema\controladoraGaren\BancoSqLite\Cadastro.sqlite");
+
+                SQLiteConnection.CreateFile ( Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BancoSqLite\\Cadastro.sqlite"));
                 //SQLiteConnection.CreateFile($"{AppDomain.CurrentDomain.BaseDirectory}\\BancoSqLite\\Cadastro.sqlite");
-            
+
             }
             catch
             {
