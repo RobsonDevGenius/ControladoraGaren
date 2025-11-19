@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>controladoraGaren.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="controladoraGaren.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="CLASSES\Dispositivo.cs" />
@@ -26,6 +31,7 @@
 
   <ItemGroup>
     <Folder Include="Configuration\" />
+    <Folder Include="Instalador\" />
   </ItemGroup>
 
 </Project>

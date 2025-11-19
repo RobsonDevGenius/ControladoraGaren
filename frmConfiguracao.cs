@@ -45,9 +45,12 @@ namespace ControladoraGaren
             {
                 txtIp.Text = config.BackendIp;
                 txtPorta.Text = config.BackendPort.ToString(); // Assumindo NumericUpDown
+                txtStringConexao.Text = config.StringConexao;
 
                int gravarLogLoop = config.GravaLogLoop;
                int bancoDadosLocal = config.BancoDadosLocal;
+               string stringConexao = config.StringConexao;
+
 
                 if (gravarLogLoop == 0)
                 {
@@ -65,6 +68,7 @@ namespace ControladoraGaren
                 else
                 {
                     chkBancoDadosLocal.Checked = true;
+                    txtStringConexao.Visible = false;   
                 }
 
             }
@@ -90,6 +94,7 @@ namespace ControladoraGaren
                 // Altera o valor da chave
                 jsonObj["ApplicationSettings"]["BackendIp"] = txtIp.Text;
                 jsonObj["ApplicationSettings"]["BackendPort"] = txtPorta.Text;
+                jsonObj["ApplicationSettings"]["StringConexao"] = txtStringConexao.Text;
 
                 if (chkGravarPacotesEmArquivo.Checked)
                 {

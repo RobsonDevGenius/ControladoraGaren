@@ -36,12 +36,14 @@
             label3 = new Label();
             chkGravarPacotesEmArquivo = new CheckBox();
             chkBancoDadosLocal = new CheckBox();
+            label4 = new Label();
+            txtStringConexao = new TextBox();
             SuspendLayout();
             // 
             // btnSalvar
             // 
             btnSalvar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnSalvar.Location = new Point(461, 216);
+            btnSalvar.Location = new Point(558, 320);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(75, 31);
             btnSalvar.TabIndex = 0;
@@ -89,7 +91,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label3.ForeColor = Color.Red;
-            label3.Location = new Point(12, 181);
+            label3.Location = new Point(12, 274);
             label3.Name = "label3";
             label3.Size = new Size(459, 21);
             label3.TabIndex = 5;
@@ -99,7 +101,7 @@
             // 
             chkGravarPacotesEmArquivo.AutoSize = true;
             chkGravarPacotesEmArquivo.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            chkGravarPacotesEmArquivo.Location = new Point(12, 96);
+            chkGravarPacotesEmArquivo.Location = new Point(12, 198);
             chkGravarPacotesEmArquivo.Name = "chkGravarPacotesEmArquivo";
             chkGravarPacotesEmArquivo.Size = new Size(260, 25);
             chkGravarPacotesEmArquivo.TabIndex = 7;
@@ -110,18 +112,38 @@
             // 
             chkBancoDadosLocal.AutoSize = true;
             chkBancoDadosLocal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            chkBancoDadosLocal.Location = new Point(12, 127);
+            chkBancoDadosLocal.Location = new Point(12, 229);
             chkBancoDadosLocal.Name = "chkBancoDadosLocal";
             chkBancoDadosLocal.Size = new Size(195, 25);
             chkBancoDadosLocal.TabIndex = 8;
             chkBancoDadosLocal.Text = "Banco de Dados Local";
             chkBancoDadosLocal.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label4.Location = new Point(12, 101);
+            label4.Name = "label4";
+            label4.Size = new Size(131, 21);
+            label4.TabIndex = 9;
+            label4.Text = "String Conexão:";
+            // 
+            // txtStringConexao
+            // 
+            txtStringConexao.Location = new Point(236, 99);
+            txtStringConexao.Multiline = true;
+            txtStringConexao.Name = "txtStringConexao";
+            txtStringConexao.Size = new Size(397, 82);
+            txtStringConexao.TabIndex = 10;
+            // 
             // frmConfiguracao
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(552, 259);
+            ClientSize = new Size(685, 377);
+            Controls.Add(txtStringConexao);
+            Controls.Add(label4);
             Controls.Add(chkBancoDadosLocal);
             Controls.Add(chkGravarPacotesEmArquivo);
             Controls.Add(label3);
@@ -147,5 +169,7 @@
         private Label label3;
         private CheckBox chkGravarPacotesEmArquivo;
         private CheckBox chkBancoDadosLocal;
+        private Label label4;
+        private TextBox txtStringConexao;
     }
 }

@@ -218,9 +218,11 @@ namespace WinFormsApp1
                 ControladoraGaren.CLASSES.AcessoDbSqlite.CriarTabelaSQlite(this);
                 CarregarListaEquipamentoSqLite();
 
+
             }
             else
             {
+                mnuCadastrarEquipamento.Visible = false;    
                 CarregarListaEquipamento();
             }
 
@@ -403,6 +405,7 @@ namespace WinFormsApp1
             this.ShowIcon = false;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.tabControl.SelectedIndex = 1;  
             //this.TopMost = true;
 
 
