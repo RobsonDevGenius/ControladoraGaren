@@ -39,7 +39,7 @@ namespace WinFormsApp1.CLASSES
             }
             catch (Exception ex)
             {
-                throw new Exception("Não foi possível consultar dados" + ex.Message);
+                throw new Exception("Não foi possível consultar dados " + ex.Message);
             }
 
             return dt;

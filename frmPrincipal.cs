@@ -222,8 +222,15 @@ namespace WinFormsApp1
             }
             else
             {
-                mnuCadastrarEquipamento.Visible = false;    
-                CarregarListaEquipamento();
+                mnuCadastrarEquipamento.Visible = false;
+                try
+                {
+                    CarregarListaEquipamento();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
 
